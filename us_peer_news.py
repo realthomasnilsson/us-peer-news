@@ -122,5 +122,8 @@ QUERY_OVERRRIDES: dict[str, str] = {
 
 SIGNAL_KEYWORDS: dict[str, list[str]] = {
     "Results": ["earnings", "guidance", "quarter", "q1", "q2", "q3", "q4", "results"],
+    "M&A": ["acquisition", "acquire", "merger", "buyout", "take private", "sale process"],
+    "AI/Product": ["ai", "agent", "launch", "product", "platform", "feature", "assistant", "copilot"],
+    "Partnership": ["partnership", "partner", "collaboration", 
 
 
