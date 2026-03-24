@@ -35,7 +35,21 @@ jobs:
 
       - name: Publish job summary
         if: always()
-        run: 
+        run: |
+          if [ -f output/latest.md ]; then
+            cat output/latest.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No report produced for this run." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+        - name: Upload report artifact
+          if: always()
+          uses: actions/upload-artifact@4
+          with:
+            name: us-peer-news-${{ github.run_number }}
+            path: output/
+
+            
 
 
 
