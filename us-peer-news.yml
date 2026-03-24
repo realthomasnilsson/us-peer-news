@@ -1,0 +1,43 @@
+name: US peer news scan
+
+on: 
+  schedule:
+    - cron: "0 3 * * 1-5" # 05:00 in Stockholm
+    - cron: "0 4 * * 1-5" # 05:00 in Stockholm
+  workflow_dispatch:
+
+jobs:
+  scan-peer-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with: 
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run peer news scan
+        env:
+          LOOCKBACK_HOURS: "36"
+          MAX_ITEMS_PER_PEER: "4"
+        run: |
+          python/scripts/us_peer_news.py
+
+      - name: Publish job summary
+        if: always()
+        run: 
+
+
+
+
+        
